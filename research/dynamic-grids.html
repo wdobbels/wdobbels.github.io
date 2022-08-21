@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="description" content="Master's thesis of Wouter Dobbels. Implementing dynamic grids in the SKIRT Monte Carlo radiative transfer code. This refines the grid based on temperature information.">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href='/assets/favicon.png'/>
+    <title>Dynamic grids in MCRT - Wouter Dobbels</title>
+    
+    <link rel="stylesheet" href="/css/default.css">
+    
+    
+    <link rel="stylesheet" href="/revealjs/css/reveal.css">
+    <link rel="stylesheet" href="/revealjs/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="/css/slides.css">
+    
+    
+</head>
+<body>
+    <nav>
+        <h2>Wouter Dobbels</h2>
+        <ul class="nav-links">
+            
+                <li>
+                    <a href="/index.html">
+                    Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/research/">
+                    Research
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects.html">
+                    Projects
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/interests.html">
+                    Interests
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog.html">
+                    Blog
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Dynamic grids</h2>
+            <h3>in Monte Carlo radiative transfer</h3>
+            <p>My master's thesis</p>
+        </section>
+        <section>
+            <h4>Cosmological simulations follow physical particles through 3D space</h4>
+            <video class="largevid" autoplay>
+                <source data-src="/assets/video/firebox.webm" type="video/webm" />
+                <source data-src="/assets/video/firebox.mp4" type="video/mp4" />
+            </video>
+        </section>
+        <section>
+            <h4>However, for real galaxies we only see the projection on the sky</h4>
+            <img data-src="/assets/img/research/dynamicgrids/NGC1365.jpg" alt="NGC1365, a barred spiral galaxy">
+        </section>
+        <section>
+            <h4>With radiative transfer, we can canculate what a simulated galaxy would look like</h4>
+            <img data-src="/assets/img/research/globalfir/slide_eagle_43.jpg" alt="">
+            <p class="small">The top right inset shows such a radiative transfer rendering</p>
+        </section>
+        <section>
+            <h4>In Monte Carlo radiative transfer, we simulate the transfer of photons through:</h4>
+            <ul>
+                <li>their birth in stars</li>
+                <li>their scattering and absorption by dust</li>
+                <li>secondary emission from dust</li>
+            </ul>
+        </section>
+        <section>
+            <h4>For computational reasons, the dust distribution needs to be <span class="highlight">discretized on a grid</span>.</h4>
+            <h4>In each grid cell, the dust density and temperature are treated to be constant.</h4>
+        </section>
+        <section>
+            <h4>The dust density is known at the start of the simulation</h4>
+            <h4>It is standard to place more cells where the dust density is higher</h4>
+            <p class="small">After all, that is where most of the interesting scattering happens</p>
+        </section>
+        <section>
+            <img data-src="/assets/img/research/dynamicgrids/agn-grid.jpg" alt="dust grid for an AGN torus">
+            <p class="small">Left: slice through a dusty torus with clumps. Right: octree dust grid.</p>
+        </section>
+        <section>
+            <h4>However, this does not necessarily lead to a good dust <span class="highlight">temperature</span> discretization!</h4>
+            <p>Unfortunately, we need the grid at the start of the simulation, when we don't have any temperature information.</p>
+        </section>
+        <section>
+            <h2>The goal of my thesis was to <span class="highlight">adapt the dust grid at run-time</span>.</h2>
+            <p>Hence the name "dynamic grids".</p>
+        </section>
+        <section>
+            <h4>In particular, we first do a short run on a standard density-optimized grid.</h4>
+            <h4>From this, we have an estimate of the dust temperature, and we can further refine the grid.</h4>
+            <p>This refined grid now properly discretizes the dust temperature as well.</p>
+        </section>
+        <section>
+            <p>This is a test case where two spheres are illuminated from a corner.</p>
+            <img data-src="/assets/img/research/dynamicgrids/grid-comparison.jpg" alt="comparison of different grids">
+            <p class="small">The reference simulation uses a lot more cells, and is used as the ground truth</p>
+            <p class="small">The other three grids use 30000 cells.</p>
+        </section>
+        <section>
+            <img data-src="/assets/img/research/dynamicgrids/grid-comparison.jpg" alt="comparison of different grids">
+            <p>Combining dust and temperature information (right column) leads to the best results.</p>
+        </section>
+        <section>
+            <h4>For more results, see the <a href="https://lib.ugent.be/en/catalog/rug01:002349816?i=1&q=Dobbels">full thesis</a>!</h4>
+        </section>
+    </div>
+</div>
+
+<p class="corner" data-slideid="0"><a href="https://lib.ugent.be/en/catalog/rug01:002349816?i=1&q=Dobbels"><b>access here!</b></a></p>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script> -->
+<script src="/revealjs/js/reveal.js"></script>
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        embedded: true,
+        controlsLayout: 'edges',
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            { src: '/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/highlight/highlight.js' },
+            { src: '/revealjs/plugin/search/search.js', async: true },
+            { src: '/revealjs/plugin/zoom-js/zoom.js', async: true },
+            { src: '/revealjs/plugin/notes/notes.js', async: true }
+        ]
+    });
+    // Show .corner s of slide 0
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (Reveal.isFirstSlide()) {
+            let currentCorners = document.querySelectorAll(`.corner[data-slideid="0"]`);
+            currentCorners.forEach( node => {
+                node.classList.add('show');
+            });
+        }
+    });    
+    
+    // On slide i: show .corner with data-slideid="i"
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        // Show corners of current slide
+        let currentCorners = document.querySelectorAll(`.corner[data-slideid="${event.indexh}"]`);
+        currentCorners.forEach( node => {
+            node.classList.add('show');
+        });
+        // Hide corners of other slides
+        let otherCorners = document.querySelectorAll(`.corner:not([data-slideid="${event.indexh}"])`);
+        otherCorners.forEach( node => {
+            node.classList.remove('show');
+        });        
+    } )
+
+</script>
+
+</body>
+</html>

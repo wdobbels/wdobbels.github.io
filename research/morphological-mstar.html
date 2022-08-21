@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="description" content="Using a single g-band image to predict the stellar mass with deep learning. The morphology helps to constrain the mass-to-light. ">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href='/assets/favicon.png'/>
+    <title>Morphological stellar mass - Wouter Dobbels</title>
+    
+    <link rel="stylesheet" href="/css/default.css">
+    
+    
+    <link rel="stylesheet" href="/revealjs/css/reveal.css">
+    <link rel="stylesheet" href="/revealjs/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="/css/slides.css">
+    
+    
+</head>
+<body>
+    <nav>
+        <h2>Wouter Dobbels</h2>
+        <ul class="nav-links">
+            
+                <li>
+                    <a href="/index.html">
+                    Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/research/">
+                    Research
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects.html">
+                    Projects
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/interests.html">
+                    Interests
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog.html">
+                    Blog
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Predicting the stellar mass of galaxies</h2>
+            <h4>based on their morphology</h4>
+        </section>
+        <section>
+            <h3>The total mass of all stars in a galaxy is an important property</h3>
+        </section>
+        <section>
+            <h3>To first order, it scales with the total light that we observe, so the interesting property is <span class="highlight">mass-to-light</span></h3>
+        </section>
+        <section>
+            <h3>Traditionally, astronomers combine multiple bands into <span class="highlight">colours</span> in order to estimate the mass-to-light</h3>
+        </section>
+        <section>
+            <h3>Galaxies can be roughly divided into two large classes</h3>
+            <p>This is based off the <a href="https://en.wikipedia.org/wiki/Hubble_sequence">Hubble tuning fork</a></p>
+            <p>and it is definitely oversimplified...</p>
+        </section>
+        <section>
+            <img data-src="/assets/img/research/morpho-mstar/M81.jpg" alt="M81 (Bode's galaxy)">
+            <h4>Spiral galaxies have active star formation, and are hence <span style="color: #4287f5;">blue</span> <span class="small">(young stars are more energetic)</span></h4>
+            <h4>Since young stars are very luminous, they have a <span class="highlight">low mass-to-light</span></h4>
+        </section>
+        <section>
+            <img data-src="/assets/img/research/morpho-mstar/ESO325G004.jpg" alt="ESO-325-G004">
+            <h4>Elliptical galaxies are often called "<span style="color: red">red-and-dead</span>", due to their low star formation</h4>
+            <h4>These objects have a <span class="highlight">high mass-to-light</span></h4>
+        </section>
+        <section>
+            <h4>In this work, we predict the stellar mass-to-light based on a galaxy's <span class="highlight">morphology</span> <span class="small">(e.g. disk and spiral structure)</span>, instead of using its colour.</h4>
+        </section>
+        <section>
+            <h4>We use a <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional neural network</a> to detect the morphology features, by training on <a href="https://www.zooniverse.org/projects/zookeeper/galaxy-zoo/">galaxy zoo</a> </h4>
+            <h4>A <a href="https://en.wikipedia.org/wiki/Gradient_boosting">gradient boosting machine</a> is used to combine all features into a final prediction.</h4>
+        </section>
+        <section>
+            <h4>We find that this leads to a useful single band stellar mass prediction</h4>
+            <img data-src="/assets/img/research/morpho-mstar/g_predictors.jpg" alt="predicted vs true mass-to-light">
+            <p class="small">Predicted (g-band only) vs true mass-to-light (M/L); bottom is our method.</p>
+        </section>
+        <section>
+            <h4>However, when multiple bands are observed, the benefit of including morphology is only marginal</h4>
+            <img data-src="/assets/img/research/morpho-mstar/gi_predictors.jpg" alt="predicted vs true mass-to-light">
+            <p class="small">Predicted (gi-band) vs true M/L; bottom left is our method.</p>
+        </section>
+        <section>
+            <h4>We also investigated how our predictor works, by looking at how M/L relates to the features</h4>
+            <img data-src="/assets/img/research/morpho-mstar/scaling_relations.jpg" alt="">
+            <p class="small">M/L on vertical axis, and one of the used features on the horizontal axis.</p>
+        </section>
+        <section>
+            <h2>More information available in the <a href="https://arxiv.org/pdf/1903.05091.pdf">paper</a>!</h2>
+        </section>
+    </div>
+</div>
+
+<p class="corner" data-slideid="0"><a href="https://arxiv.org/pdf/1903.05091.pdf" target="_blank" rel="noopener"><b>paper here!</b></a></p>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script> -->
+<script src="/revealjs/js/reveal.js"></script>
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        embedded: true,
+        controlsLayout: 'edges',
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            { src: '/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/highlight/highlight.js' },
+            { src: '/revealjs/plugin/search/search.js', async: true },
+            { src: '/revealjs/plugin/zoom-js/zoom.js', async: true },
+            { src: '/revealjs/plugin/notes/notes.js', async: true }
+        ]
+    });
+    // Show .corner s of slide 0
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (Reveal.isFirstSlide()) {
+            let currentCorners = document.querySelectorAll(`.corner[data-slideid="0"]`);
+            currentCorners.forEach( node => {
+                node.classList.add('show');
+            });
+        }
+    });    
+    
+    // On slide i: show .corner with data-slideid="i"
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        // Show corners of current slide
+        let currentCorners = document.querySelectorAll(`.corner[data-slideid="${event.indexh}"]`);
+        currentCorners.forEach( node => {
+            node.classList.add('show');
+        });
+        // Hide corners of other slides
+        let otherCorners = document.querySelectorAll(`.corner:not([data-slideid="${event.indexh}"])`);
+        otherCorners.forEach( node => {
+            node.classList.remove('show');
+        });        
+    } )
+
+</script>
+
+</body>
+</html>

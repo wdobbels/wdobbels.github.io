@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="description" content="Predicting the global FIR of galaxies. Machine learning techniques can use a training set of galaxies with UV-FIR data, to predict the FIR from UV-MIR input.">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href='/assets/favicon.png'/>
+    <title>Predicting global FIR - Wouter Dobbels</title>
+    
+    <link rel="stylesheet" href="/css/default.css">
+    
+    
+    <link rel="stylesheet" href="/revealjs/css/reveal.css">
+    <link rel="stylesheet" href="/revealjs/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="/css/slides.css">
+    
+    
+</head>
+<body>
+    <nav>
+        <h2>Wouter Dobbels</h2>
+        <ul class="nav-links">
+            
+                <li>
+                    <a href="/index.html">
+                    Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/research/">
+                    Research
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects.html">
+                    Projects
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/interests.html">
+                    Interests
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog.html">
+                    Blog
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Predicting the global far-infrared SED of galaxies</h2>
+            <h4>using machine learning techniques</h4>
+        </section>
+
+        <section>
+            <h3>Galaxies emit across the whole wavelength spectrum</h3>
+            <img data-src="/assets/img/research/globalfir/M31-composite.jpg" alt="composite view of M31">
+            <p><i>Andromeda from X-ray to far-infrared (FIR)</i></p>
+        </section>
+
+        <section>
+            <h4>When we consider the <i>total light</i> at each wavelength, we talk about the <i>spectral energy distribution (SED)</i></h4>
+        </section>
+
+        <section>
+            <h3>This is an example SED</h3>
+            <img data-src="/assets/img/research/globalfir/sed.jpg"" alt="example SED">
+            <p class="small">Hotter objects (such as young stellar populations, with temperatures above 10 000 K) emit at shorter wavelengths (i.e. higher photon energies) than colder objects (e.g. dust at around 20 K)</p>
+        </section>
+
+        <section>
+            <h3>Stars are the primary source of emission</h3>
+            <img data-src="/assets/img/research/globalfir/sed_stars.jpg" alt="example stellar SED">
+        </section>
+
+        <section>
+            <h3>However, their emission is partially absorbed by dust</h3>
+            <img data-src="/assets/img/research/globalfir/attenuation.jpg" alt="attenuation">
+        </section>
+
+        <section>
+            <h3>You might know this absorption from the Milky Way...</h3>
+            <img data-src="/assets/img/research/globalfir/milky_way.jpeg" alt="milky way">
+        </section>
+
+        <section>
+            <h3>...but it can be very prominent in other galaxies as well</h3>
+            <img data-src="/assets/img/research/globalfir/M64.jpg" alt="M64">
+            <p>This is M64, the "black eye galaxy"</p>
+        </section>
+
+        <section>
+            <h3>The absorbed radiation heats the dust (to about 20 K), which then emits thermally.</h3>
+            <h3>If the dust is in thermal equilibrium, the total absorbed energy equals its total emitted energy.</h3>
+        </section>
+
+        <section>
+            <h3>This is known as the dust energy balance</h3>
+            <img data-src="/assets/img/research/globalfir/dust-emission.jpg" alt="dust energy balance">
+        </section>
+
+        <section>
+            <h3>Unfortunately, observing the full spectrum from ultraviolet (UV) to far-infrared (FIR) is currently impossible...</h3>
+            <p>The SEDs shown so far were models, not actual observations</p>
+        </section>
+        
+        <section>
+            <h3>Instead, we often observe through a few broadbands, like this:</h3>
+            <img data-src="/assets/img/research/globalfir/observed-sed.jpg" alt="">
+            <p class="small">This galaxy is quite close (~100 million light years), and hence the errors are small: for many galaxies the observations are of lower quality.</p>
+        </section>
+
+        <section>
+            <h3>Now, we can fit a model through the observed fluxes</h3>
+            <img data-src="/assets/img/research/globalfir/observed-sed-fit.jpg" alt="">
+            <p>Energy balance can help constrain the models</p>
+        </section>
+
+        <section>
+            <h3>Unfortunately, observing from UV to FIR is not straightforward.</h3>
+            <h3 class="fragment">For example, FIR radiation is absorbed by the earth atmosphere, and hence <span class="highlight">observing in the FIR requires expensive space missions.</span></h3>
+        </section>
+
+        <section>
+            <h3>For many galaxies, we lack FIR observations.</h3>
+            <img data-src="/assets/img/research/globalfir/missing-fir.jpg" alt="">
+        </section>
+
+        <section>
+            <p>So my main research question is:</p>
+            <h2>Can we learn about the <span class="highlight">dust properties</span> if we lack FIR observations?</h2>
+        </section>
+
+        <section>
+            <p>Specifically, the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <ul>
+                <li>dust mass</li>
+                <li>dust temperature</li>
+                <li>FIR luminosity</li>
+            </ul>
+            <p>typically require FIR observations.</p>
+        </section>
+
+        <section>
+            <h4>The main idea is to use a UV-FIR dataset as a blueprint for a <span class="highlight">machine learning</span> algorithm.</h4>
+            <p>Input: UV-MIR broadband luminosities</p>
+            <p>Output: dust properties and FIR luminosities</p>
+        </section>
+
+        <section>
+            <h3>By repeatedly showing examples of both input and output (<i>supervised learning</i>), the algorithm learns to predict the correct output.</h3>
+        </section>
+
+        <section>
+            <h2>So here are the results...</h2>
+        </section>
+
+        <section>
+            <h3>Some of the predictions (<span style="color: orange">orange</span>) compared to the ground truth (<span style="color: red">red</span>)</h3>
+            <img data-src="/assets/img/research/globalfir/example_seds_normal.png" alt="">
+            <p>We take the 30th, 50th and 70th percentile when ordering by prediction quality (RMSE)</p>
+        </section>
+
+        <section>
+            <h3>Dust properties: predicted vs true</h3>
+            <img data-src="/assets/img/research/globalfir/truevspred_nnet_props.png" alt="">
+        </section>
+
+        <section>
+            <h3>FIR fluxes: predicted vs true</h3>
+            <img data-src="/assets/img/research/globalfir/truevspred_nnet_fluxes.png" alt="">
+        </section>
+
+        <section>
+            <h4>I also predicted uncertainties, investigated when predictions are off, and explored what drives the predictions.</h4>
+            <h3>Find out more in the <a href="https://arxiv.org/pdf/1910.06330.pdf">paper</a> or on the <a href="https://wdobbels.github.io/FIREnet/index.html">web page</a> (with interactive plots!)</h3>
+        </section>
+    </div>
+</div>
+
+<p class="corner" data-slideid="0"><a href="https://arxiv.org/pdf/1910.06330.pdf" target="_blank" rel="noopener"><b>paper here!</b></a></p>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script> -->
+<script src="/revealjs/js/reveal.js"></script>
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        embedded: true,
+        controlsLayout: 'edges',
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            { src: '/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/highlight/highlight.js' },
+            { src: '/revealjs/plugin/search/search.js', async: true },
+            { src: '/revealjs/plugin/zoom-js/zoom.js', async: true },
+            { src: '/revealjs/plugin/notes/notes.js', async: true }
+        ]
+    });
+    // Show .corner s of slide 0
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (Reveal.isFirstSlide()) {
+            let currentCorners = document.querySelectorAll(`.corner[data-slideid="0"]`);
+            currentCorners.forEach( node => {
+                node.classList.add('show');
+            });
+        }
+    });    
+    
+    // On slide i: show .corner with data-slideid="i"
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        // Show corners of current slide
+        let currentCorners = document.querySelectorAll(`.corner[data-slideid="${event.indexh}"]`);
+        currentCorners.forEach( node => {
+            node.classList.add('show');
+        });
+        // Hide corners of other slides
+        let otherCorners = document.querySelectorAll(`.corner:not([data-slideid="${event.indexh}"])`);
+        otherCorners.forEach( node => {
+            node.classList.remove('show');
+        });        
+    } )
+
+</script>
+
+</body>
+</html>

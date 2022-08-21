@@ -1,0 +1,60 @@
+body {
+    background-color: #2b2c2e;
+}
+
+#notebook-container {
+    background-color: #111111;
+}
+
+#notebook-container h1 {
+    letter-spacing: .2rem;
+    border-bottom: 2px solid #ccced1;
+}
+
+#notebook-container img {
+    margin: 0;
+}
+
+#notebook-container .text_cell_render {
+    color: white;
+    font-size: 1.2rem;
+    font-family: "Montserrat", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+    line-height: 1.5;
+}
+
+#notebook-container .input_area {
+    background-color: #191919;
+    border-color: #3D3C3C;
+}
+
+#notebook-container pre {
+    color: white;
+}
+
+#notebook-container pre .kn, #notebook-container pre .k {
+    color: #E9B353;
+}
+
+#notebook-container pre .nn, #notebook-container pre .nf {
+    color: #10A7ED;
+}
+
+#notebook-container pre .o, #notebook-container pre .mi, #notebook-container pre .mf {
+    color: #B6CAD3;
+}
+
+#notebook-container pre .nb, #notebook-container pre .kc {
+    color: #7BE54E;
+}
+
+#notebook-container pre .sd, #notebook-container pre .s1, #notebook-container pre .s2 {
+    color: #E0423A;
+}
+
+#notebook-container pre .ow {
+    color: #ED47AD;
+}
+
+#notebook-container .input_prompt {
+    color: #7080E5 !important;
+}

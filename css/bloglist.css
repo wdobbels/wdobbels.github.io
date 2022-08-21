@@ -1,0 +1,33 @@
+.blog-body {
+    max-width: 900px;
+    margin: 50px auto;
+}
+
+.blog-body h3 {
+    margin-bottom: 50px;
+}
+
+.post-container {
+    border-left: 2px solid #ccced1;
+    padding-left: 15px;
+}
+
+.post-title {
+    font-size: 1.5rem;
+    position: relative;
+    top: -10px;
+    margin: 0;
+}
+
+.post-topics {
+    font-style: italic;
+    margin: 0;
+    position: relative;
+    top: -10px;
+    color: white;
+}
+
+.post-description {
+    margin-top: 5px;
+    color: white;
+}

@@ -1,0 +1,45 @@
+html, body
+{
+    height: 100%;
+}
+
+.reveal {
+    height: calc(100% - 50px);
+}
+
+.reveal h3 {
+    font-size: 1.1em;
+}
+
+.small {
+    font-size: 0.6em !important;
+}
+
+img {
+    /* display: block; */
+    height: 50vh;
+}
+
+.highlight {
+    color: #4287f5;
+}
+
+.slides a {
+    color: var(--primary);
+}
+
+.corner {
+    display: none;
+    position: absolute;
+    bottom: 5vh;
+    right: 5vw;
+}
+
+.show {
+    display: block;
+}
+
+.largevid {
+    /* height: 100vh; */
+    width: 70vw;
+}

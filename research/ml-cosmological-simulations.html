@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="description" content="Cosmological simulations provide an excellent ground truth for machine learning. We can learn the relation between observed properties and physical properties.">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href='/assets/favicon.png'/>
+    <title>ML on cosmological simulations - Wouter Dobbels</title>
+    
+    <link rel="stylesheet" href="/css/default.css">
+    
+    
+    <link rel="stylesheet" href="/revealjs/css/reveal.css">
+    <link rel="stylesheet" href="/revealjs/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="/css/slides.css">
+    
+    
+</head>
+<body>
+    <nav>
+        <h2>Wouter Dobbels</h2>
+        <ul class="nav-links">
+            
+                <li>
+                    <a href="/index.html">
+                    Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/research/">
+                    Research
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects.html">
+                    Projects
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/interests.html">
+                    Interests
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog.html">
+                    Blog
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Machine learning on cosmological simulations</h2>
+            <h4>Using the EAGLE simulations for a better ground truth</h4>
+            <p>Supervising master students</p>
+        </section>
+        <section>
+            <h4>Going from observations to physical properties (e.g. estimating the stellar mass) is very challenging</h4>
+            <ul>
+                <li>Observations have uncertainties</li>
+                <li>Our physical models have uncertainties and biases</li>
+                <li>Different wavelength regimes can suffer from different biases</li>
+            </ul>
+        </section>
+        <section>
+            <h4>It is easier to forward-model simulated galaxies into observations</h4>
+            <p>Via radiative transfer, we can create a mock image</p>
+            <img data-src="/assets/img/research/slide_eagle_43.jpg" alt="RT on EAGLE">
+            <p class="small">Top right inset is a <a href="http://www.skirt.ugent.be/root/_landing.html">SKIRT</a> image of an <a href="http://icc.dur.ac.uk/Eagle/">EAGLE galaxy</a></p>
+        </section>
+        <section>
+            <h4>These simulated galaxies can then be compared to actual observations</h4>
+            <img data-src="/assets/img/research/cosmo-ml/fire-simulations.jpg" alt="RT on FIRE">
+            <p class="small">This is a galaxy simulated by the <a href="https://fire.northwestern.edu/">FIRE simulations</a></p>
+        </section>
+        <section>
+            <h4>Using <span class="highlight">machine learning</span>, we can learn the relation between physical properties and observed properties, using simulated galaxies</h4>
+            <h4>This relation can then be applied to real galaxies</h4>
+        </section>
+        <section>
+            <h4>Find out more in <a href="https://lib.ugent.be/en/catalog/rug01:002782902?i=0">Pieter's thesis</a>!</h4>
+        </section>
+    </div>
+</div>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script> -->
+<script src="/revealjs/js/reveal.js"></script>
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        embedded: true,
+        controlsLayout: 'edges',
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            { src: '/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/highlight/highlight.js' },
+            { src: '/revealjs/plugin/search/search.js', async: true },
+            { src: '/revealjs/plugin/zoom-js/zoom.js', async: true },
+            { src: '/revealjs/plugin/notes/notes.js', async: true }
+        ]
+    });
+    // Show .corner s of slide 0
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (Reveal.isFirstSlide()) {
+            let currentCorners = document.querySelectorAll(`.corner[data-slideid="0"]`);
+            currentCorners.forEach( node => {
+                node.classList.add('show');
+            });
+        }
+    });    
+    
+    // On slide i: show .corner with data-slideid="i"
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        // Show corners of current slide
+        let currentCorners = document.querySelectorAll(`.corner[data-slideid="${event.indexh}"]`);
+        currentCorners.forEach( node => {
+            node.classList.add('show');
+        });
+        // Hide corners of other slides
+        let otherCorners = document.querySelectorAll(`.corner:not([data-slideid="${event.indexh}"])`);
+        otherCorners.forEach( node => {
+            node.classList.remove('show');
+        });        
+    } )
+
+</script>
+
+</body>
+</html>

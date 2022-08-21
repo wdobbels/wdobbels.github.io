@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="description" content="Using machine learning to predict a far-infrared image, based on a series of ultraviolet to near-infrared images.">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href='/assets/favicon.png'/>
+    <title>Predicting FIR images - Wouter Dobbels</title>
+    
+    <link rel="stylesheet" href="/css/default.css">
+    
+    
+    <link rel="stylesheet" href="/revealjs/css/reveal.css">
+    <link rel="stylesheet" href="/revealjs/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="/css/slides.css">
+    
+    
+</head>
+<body>
+    <nav>
+        <h2>Wouter Dobbels</h2>
+        <ul class="nav-links">
+            
+                <li>
+                    <a href="/index.html">
+                    Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/research/">
+                    Research
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects.html">
+                    Projects
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/interests.html">
+                    Interests
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog.html">
+                    Blog
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Predicting far-infrared images of galaxies</h2>
+            <h4>using machine learning techniques</h4>
+        </section>
+        <section>
+            <h2>Galaxies emit across the whole wavelength spectrum</h2>
+        </section>
+        <section>
+            <h3>In general, more energetic events happen at shorter wavelengths</h3>
+            <ul>
+                <li>ultraviolet (UV): young, massive stars</li>
+                <li>optical to near-infrared (NIR): older stars</li>
+                <li>mid-to-far-infrared (MIR-FIR): interstellar dust</li>
+            </ul>
+        </section>
+
+        <section>
+            <img data-src="/assets/img/research/resolvedfir/M31_spectrum.jpg" alt="Andromeda from X-ray to radio">
+            <h4>Our neighbor Andromeda, from high-energy X-ray to low-energy radio</h4>
+        </section>
+
+        <section>
+            <h4>My goal is to <span class="highlight">use the UV-FIR pixels of Andromeda as a training set</span>, in order to learn a mapping from UV-MIR (input) to FIR (output).</h4>
+        </section>
+        <section>
+            <h4>Then, even for galaxies where we do not have FIR data, I can predict the FIR image.</h4>
+            <h4>I can use the galaxies where FIR is available as a test set.</h4>
+        </section>
+        <section>
+            <h3>Find out more in the <a href="https://arxiv.org/pdf/2110.01704.pdf">paper</a></h3>
+            <p>The project is similar to the one on <a href="/research/globalfir.html">FIR prediction on global scales</a>.</p>
+        </section>
+    </div>
+</div>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script> -->
+<script src="/revealjs/js/reveal.js"></script>
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        embedded: true,
+        controlsLayout: 'edges',
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            { src: '/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/revealjs/plugin/highlight/highlight.js' },
+            { src: '/revealjs/plugin/search/search.js', async: true },
+            { src: '/revealjs/plugin/zoom-js/zoom.js', async: true },
+            { src: '/revealjs/plugin/notes/notes.js', async: true }
+        ]
+    });
+    // Show .corner s of slide 0
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (Reveal.isFirstSlide()) {
+            let currentCorners = document.querySelectorAll(`.corner[data-slideid="0"]`);
+            currentCorners.forEach( node => {
+                node.classList.add('show');
+            });
+        }
+    });    
+    
+    // On slide i: show .corner with data-slideid="i"
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        // Show corners of current slide
+        let currentCorners = document.querySelectorAll(`.corner[data-slideid="${event.indexh}"]`);
+        currentCorners.forEach( node => {
+            node.classList.add('show');
+        });
+        // Hide corners of other slides
+        let otherCorners = document.querySelectorAll(`.corner:not([data-slideid="${event.indexh}"])`);
+        otherCorners.forEach( node => {
+            node.classList.remove('show');
+        });        
+    } )
+
+</script>
+
+</body>
+</html>
